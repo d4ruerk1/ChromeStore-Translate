@@ -1,0 +1,93 @@
+{
+ "extName": {
+  "message": "Translate"
+ },
+ "extDesc": {
+  "message": "Traduci il testo selezionato e intere pagine sul posto, senza rompere l'impaginazione."
+ },
+ "menuSelection": {
+  "message": "Traduci «%s»"
+ },
+ "menuPage": {
+  "message": "Traduci pagina"
+ },
+ "menuOriginal": {
+  "message": "Mostra originale"
+ },
+ "cmdTogglePage": {
+  "message": "Traduci la pagina / mostra l'originale"
+ },
+ "detectLanguage": {
+  "message": "Rileva lingua"
+ },
+ "detectedLang": {
+  "message": "Rilevata: $LANG$",
+  "placeholders": {
+   "lang": {
+    "content": "$1"
+   }
+  }
+ },
+ "sourceLanguage": {
+  "message": "Lingua di partenza"
+ },
+ "targetLanguage": {
+  "message": "Lingua di arrivo"
+ },
+ "swap": {
+  "message": "Inverti lingue"
+ },
+ "inputPlaceholder": {
+  "message": "Scrivi o incolla il testo"
+ },
+ "outputPlaceholder": {
+  "message": "Traduzione"
+ },
+ "outputLabel": {
+  "message": "Risultato della traduzione"
+ },
+ "copy": {
+  "message": "Copia"
+ },
+ "copied": {
+  "message": "Copiato"
+ },
+ "clear": {
+  "message": "Cancella"
+ },
+ "translatePage": {
+  "message": "Traduci pagina"
+ },
+ "showOriginal": {
+  "message": "Mostra originale"
+ },
+ "pageUnavailable": {
+  "message": "Non disponibile su questa pagina"
+ },
+ "translating": {
+  "message": "Traduzione in corso…"
+ },
+ "translatedTo": {
+  "message": "Tradotto in $LANG$",
+  "placeholders": {
+   "lang": {
+    "content": "$1"
+   }
+  }
+ },
+ "errorGeneric": {
+  "message": "Traduzione non riuscita. Controlla la connessione e riprova."
+ },
+ "close": {
+  "message": "Chiudi"
+ },
+ "privacy": {
+  "message": "Privacy"
+ },
+ "privacyNotice": {
+  "message": "Il testo da tradurre viene inviato a Google Traduttore (alternativa: MyMemory). L'estensione non raccoglie alcun dato."
+ },
+ "ok": {
+  "message": "Ho capito"
+ }
+}

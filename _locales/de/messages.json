@@ -1,0 +1,93 @@
+{
+ "extName": {
+  "message": "Translate"
+ },
+ "extDesc": {
+  "message": "Übersetze markierten Text und ganze Seiten direkt, ohne das Layout zu zerstören."
+ },
+ "menuSelection": {
+  "message": "„%s“ übersetzen"
+ },
+ "menuPage": {
+  "message": "Seite übersetzen"
+ },
+ "menuOriginal": {
+  "message": "Original anzeigen"
+ },
+ "cmdTogglePage": {
+  "message": "Seite übersetzen / Original anzeigen"
+ },
+ "detectLanguage": {
+  "message": "Sprache erkennen"
+ },
+ "detectedLang": {
+  "message": "Erkannt: $LANG$",
+  "placeholders": {
+   "lang": {
+    "content": "$1"
+   }
+  }
+ },
+ "sourceLanguage": {
+  "message": "Ausgangssprache"
+ },
+ "targetLanguage": {
+  "message": "Zielsprache"
+ },
+ "swap": {
+  "message": "Sprachen tauschen"
+ },
+ "inputPlaceholder": {
+  "message": "Text eingeben oder einfügen"
+ },
+ "outputPlaceholder": {
+  "message": "Übersetzung"
+ },
+ "outputLabel": {
+  "message": "Übersetzungsergebnis"
+ },
+ "copy": {
+  "message": "Kopieren"
+ },
+ "copied": {
+  "message": "Kopiert"
+ },
+ "clear": {
+  "message": "Löschen"
+ },
+ "translatePage": {
+  "message": "Seite übersetzen"
+ },
+ "showOriginal": {
+  "message": "Original anzeigen"
+ },
+ "pageUnavailable": {
+  "message": "Auf dieser Seite nicht verfügbar"
+ },
+ "translating": {
+  "message": "Wird übersetzt…"
+ },
+ "translatedTo": {
+  "message": "Übersetzt in: $LANG$",
+  "placeholders": {
+   "lang": {
+    "content": "$1"
+   }
+  }
+ },
+ "errorGeneric": {
+  "message": "Übersetzung fehlgeschlagen. Prüfe die Verbindung und versuche es erneut."
+ },
+ "close": {
+  "message": "Schließen"
+ },
+ "privacy": {
+  "message": "Datenschutz"
+ },
+ "privacyNotice": {
+  "message": "Zu übersetzender Text wird an Google Übersetzer gesendet (Ersatz: MyMemory). Die Erweiterung erhebt keine Daten."
+ },
+ "ok": {
+  "message": "Verstanden"
+ }
+}

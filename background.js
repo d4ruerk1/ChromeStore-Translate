@@ -6,7 +6,6 @@
  *   - MyMemory (Translated S.r.l., Italy) – public API, no key (default)
  *   - Google Cloud Translation API v2 – user's own API key
  *   - DeepL API (Free or Pro) – user's own API key
- *   - LibreTranslate – instance chosen by the user (also self-hosted)
  * No server of the developer is involved; API keys stay in chrome.storage.local.
  */
 importScripts('languages.js');
@@ -20,11 +19,10 @@ const LIMITS = {
   mymemory: { chars: 500, items: 1, parallel: 3 },   // MyMemory: max 500 bytes per query
   google: { chars: 4500, items: 100, parallel: 4 },
   deepl: { chars: 4500, items: 50, parallel: 3 },    // DeepL: max 50 texts per request
-  libre: { chars: 4500, items: 50, parallel: 2 }
 };
 const TIMEOUT_MS = 15000;
 const CACHE_MAX = 4000;
-const DEFAULTS = { src: 'auto', tgt: null, engine: 'mymemory', gKey: '', dKey: '', ltUrl: '', ltKey: '', mmEmail: '' };
+const DEFAULTS = { src: 'auto', tgt: null, engine: 'mymemory', gKey: '', dKey: '', mmEmail: '' };
 
 const msg = (k, s) => chrome.i18n.getMessage(k, s) || k;
 const uiLang = () => TLang.normalize((self.navigator && navigator.language) || chrome.i18n.getUILanguage());
@@ -33,7 +31,7 @@ const uiLang = () => TLang.normalize((self.navigator && navigator.language) || c
 async function getSettings() {
   const s = await chrome.storage.local.get(DEFAULTS);
   if (!s.tgt) s.tgt = uiLang();
-  if (!LIMITS[s.engine]) s.engine = 'mymemory';
+  if (!['mymemory', 'google', 'deepl'].includes(s.engine)) s.engine = 'mymemory';
   return s;
 }
 
@@ -165,14 +163,6 @@ function fromDeepl(code) {
   const c = code.toLowerCase();
   return c === 'zh' ? 'zh-CN' : c === 'nb' ? 'no' : TLang.normalize(c);
 }
-function libreCode(code) {
-  const m = { 'zh-CN': 'zh', 'zh-TW': 'zt', no: 'nb', jw: 'jv', tl: 'tl' };
-  return m[code] || code;
-}
-function fromLibre(code) {
-  if (!code) return null;
-  return code === 'zt' ? 'zh-TW' : code === 'zh' ? 'zh-CN' : TLang.normalize(code);
-}
 const utf8Len = (s) => new TextEncoder().encode(s).length;
 
 /* ---------- engines: (texts[], sl, tl, format, settings) -> [{t, l}] ---------- */
@@ -219,23 +209,8 @@ async function deepl(texts, sl, tl, format, s) {
   return tr.map((x) => ({ t: String(x.text ?? ''), l: fromDeepl(x.detected_source_language) }));
 }
 
-async function libre(texts, sl, tl, format, s) {
-  if (!s.ltUrl) throw new EngineError('config');
-  const base = s.ltUrl.replace(/\/+$/, '');
-  const origin = new URL(base).origin + '/*';
-  if (!(await chrome.permissions.contains({ origins: [origin] }))) throw new EngineError('config');
-  const body = { q: texts, source: sl === 'auto' ? 'auto' : libreCode(sl), target: libreCode(tl), format };
-  if (s.ltKey) body.api_key = s.ltKey;
-  const data = await fetchJSON(`${base}/translate`, {
-    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body)
-  });
-  const tr = Array.isArray(data.translatedText) ? data.translatedText : [data.translatedText];
-  if (tr.length !== texts.length) throw new EngineError('http', 0);
-  const det = Array.isArray(data.detectedLanguage) ? data.detectedLanguage : [data.detectedLanguage];
-  return tr.map((t, i) => ({ t: String(t ?? ''), l: det[i] && det[i].language ? fromLibre(det[i].language) : (sl === 'auto' ? null : sl) }));
-}
 
-const ENGINES = { mymemory: myMemory, google: googleCloud, deepl, libre };
+const ENGINES = { mymemory: myMemory, google: googleCloud, deepl };
 
 /* Open the options page at most once per browser session when the service needs attention. */
 async function nudgeOptions(reason) {

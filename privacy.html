@@ -21,7 +21,7 @@ table{border-collapse:collapse;width:100%;font-size:14px}td,th{border:1px solid 
 <h2>Quali dati vengono trattati e da chi</h2>
 <ul>
 <li><strong>Testo da tradurre</strong> (testo selezionato, testo scritto nel popup o, solo se lo chiedi, il testo della pagina aperta). Può contenere dati personali se la pagina ne contiene. Viene inviato via HTTPS <em>solo</em> al servizio scelto. Non vengono inviati l'indirizzo della pagina, i cookie o identificativi del browser.</li>
-<li><strong>Preferenze</strong> (lingue usate, servizio scelto, eventuali chiavi API, indirizzo LibreTranslate, email facoltativa per MyMemory): salvate solo nel tuo browser (<code>chrome.storage.local</code>), mai sincronizzate.</li>
+<li><strong>Preferenze</strong> (lingue usate, servizio scelto, eventuali chiavi API, email facoltativa per MyMemory): salvate solo nel tuo browser (<code>chrome.storage.local</code>), mai sincronizzate.</li>
 <li><strong>Bozza del popup</strong>: conservata solo per la sessione (<code>chrome.storage.session</code>) e cancellata alla chiusura del browser.</li>
 </ul>
 
@@ -30,11 +30,10 @@ table{border-collapse:collapse;width:100%;font-size:14px}td,th{border:1px solid 
 <tr><td>MyMemory (predefinito)</td><td>Translated S.r.l., Roma, Italia</td><td>Se scelto. Riceve il testo e, se la inserisci, la tua email (serve solo ad alzare il limite giornaliero). Informativa: mymemory.translated.net</td></tr>
 <tr><td>Google Cloud Translation API</td><td>Google Ireland Ltd. / Google LLC</td><td>Se scelto, con la tua chiave e secondo i termini Google Cloud che hai accettato. Possibile trasferimento extra-UE coperto dall'EU-US Data Privacy Framework e dalle clausole contrattuali standard di Google.</td></tr>
 <tr><td>DeepL API</td><td>DeepL SE, Colonia, Germania</td><td>Se scelto, con la tua chiave e secondo i termini DeepL API che hai accettato.</td></tr>
-<tr><td>LibreTranslate</td><td>Chi gestisce l'istanza che indichi</td><td>Se scelto. Se l'istanza è sul tuo computer, nessun terzo riceve il testo.</td></tr>
 </table>
 
 <h2>Ruoli (GDPR)</h2>
-<p>Lo sviluppatore non tratta dati personali per conto proprio e non è titolare dei dati inviati ai servizi di traduzione: ogni fornitore li tratta come titolare autonomo (o come responsabile per conto tuo, se usi la tua chiave aziendale) secondo la propria informativa. La base giuridica dell'invio è la tua richiesta esplicita di tradurre (art. 6.1.b GDPR, esecuzione del servizio richiesto).</p>
+<p>Lo sviluppatore non riceve il testo e non lo tratta per finalità proprie. Il ruolo GDPR del fornitore scelto, e l'eventuale ruolo dello sviluppatore o dell'utente che configura una chiave, dipendono dal servizio, dai suoi termini e dall'uso concreto: verifica l'informativa e i termini del fornitore prima di inviare dati personali. L'invio avviene solo dopo una richiesta esplicita di traduzione; la base giuridica applicabile va valutata dal soggetto che determina finalità e mezzi del trattamento.</p>
 
 <h2>Permessi richiesti</h2>
 <ul>
@@ -42,14 +41,13 @@ table{border-collapse:collapse;width:100%;font-size:14px}td,th{border:1px solid 
 <li><code>contextMenus</code>: voce «Traduci» nel menu del tasto destro.</li>
 <li><code>storage</code>: ricordare lingue e servizio scelto.</li>
 <li>Accesso a <code>api.mymemory.translated.net</code>, <code>translation.googleapis.com</code>, <code>api-free.deepl.com</code>, <code>api.deepl.com</code>: inviare il testo al servizio scelto (solo a quello).</li>
-<li>Permesso facoltativo su un singolo indirizzo: chiesto solo se configuri un'istanza LibreTranslate, e solo per quell'istanza.</li>
 </ul>
 
 <h2>Chrome Web Store: uso limitato</h2>
 <p>L'uso delle informazioni ricevute dall'estensione è conforme alle norme del Chrome Web Store sui dati degli utenti (<em>User Data Policy</em>), inclusi i requisiti di <em>Uso limitato</em>: i dati servono solo alla traduzione richiesta, non vengono venduti, non sono usati per pubblicità o profilazione e non sono letti da persone.</p>
 
 <h2>Consigli</h2>
-<p>Non tradurre dati sensibili (password, dati sanitari, documenti riservati) con servizi di terzi. Per massima riservatezza usa un'istanza LibreTranslate sul tuo computer.</p>
+<p>Non tradurre dati sensibili (password, dati sanitari, documenti riservati) con servizi di terzi. Per massima riservatezza, non inviarli a un servizio remoto.</p>
 
 <h2>I tuoi diritti</h2>
 <p>Per cancellare tutti i dati locali basta disinstallare l'estensione. Per i dati ricevuti dai servizi di traduzione puoi esercitare i diritti degli artt. 15–22 GDPR presso il fornitore scelto e proporre reclamo al Garante per la protezione dei dati personali (garanteprivacy.it). Contatti per questa estensione: sezione Issues del repository GitHub <code>d4ruerk1/ChromeStore-Translate</code>.</p>
@@ -58,8 +56,8 @@ table{border-collapse:collapse;width:100%;font-size:14px}td,th{border:1px solid 
 
 <h1>Translate – Privacy policy</h1>
 <p>Last updated: 14 October 2026 · version 1.1.0</p>
-<p>Translate has no servers and the developer receives, stores and sells <strong>no data</strong>. Only the text <strong>you choose</strong> to translate (selection, popup text or, on request, the current page) is sent over HTTPS directly from your browser to the translation service you selected in the options: MyMemory (Translated S.r.l., Italy, default), Google Cloud Translation API (your key), DeepL API (your key) or a LibreTranslate instance you specify. Each provider processes it under its own privacy policy. No URLs, cookies or identifiers are sent. Preferences and API keys stay in <code>chrome.storage.local</code> and are never synced; the popup draft is kept only for the session. No analytics, ads or tracking.</p>
-<p>Permissions: activeTab / scripting (translate the current tab after your action), contextMenus (right-click item), storage (remember languages and service), access to the official translation endpoints listed above, and an optional permission for a single LibreTranslate address you configure.</p>
+<p>Translate has no servers and the developer receives, stores and sells <strong>no data</strong>. Only the text <strong>you choose</strong> to translate (selection, popup text or, on request, the current page) is sent over HTTPS directly from your browser to the translation service you selected in the options: MyMemory (Translated S.r.l., Italy, default), Google Cloud Translation API (your key), DeepL API (your key). Each provider processes it under its own privacy policy. No URLs, cookies or identifiers are sent. Preferences and API keys stay in <code>chrome.storage.local</code> and are never synced; the popup draft is kept only for the session. No analytics, ads or tracking.</p>
+<p>Permissions: activeTab / scripting (translate the current tab after your action), contextMenus (right-click item), storage (remember languages and service), access to the official translation endpoints listed above,.</p>
 <p>The use of information received by this extension adheres to the Chrome Web Store User Data Policy, including the Limited Use requirements. Avoid translating sensitive information. Uninstalling removes all locally stored data. Contact: Issues on the GitHub repository <code>d4ruerk1/ChromeStore-Translate</code>.</p>
 </body>
 </html>

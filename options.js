@@ -9,12 +9,12 @@
       mmEmail: 'Email facoltativa (MyMemory alza il limite giornaliero se la fornisci)',
       gDesc: 'API ufficiale di Google con la tua chiave (fatturazione Google Cloud, quota gratuita mensile). Ideale per pagine intere.',
       dDesc: 'API ufficiale DeepL con la tua chiave (Free o Pro). Meno lingue, ottima qualità.',
-      lDesc: 'Istanza scelta da te, anche sul tuo computer: nessun fornitore terzo se è self-hosted.',
-      apiKey: 'Chiave API', apiKeyOpt: 'Chiave API (se richiesta)', ltUrl: 'Indirizzo dell\'istanza',
+     
+      apiKey: 'Chiave API',
       keysLocal: 'Le chiavi restano solo in questo browser (chrome.storage.local), non vengono sincronizzate né inviate ad altri che al servizio scelto.',
-      save: 'Salva', saved: 'Salvato', needKey: 'Inserisci la chiave per il servizio scelto.', needUrl: 'Inserisci un indirizzo valido (https, oppure localhost).', denied: 'Permesso per l\'istanza negato.',
+      save: 'Salva', saved: 'Salvato', needKey: 'Inserisci la chiave per il servizio scelto.',
       privacy: 'Informativa privacy',
-      r_config: 'Il servizio scelto non è configurato: completa i dati qui sotto.', r_badKey: 'La chiave API è stata rifiutata dal servizio.', r_quota: 'Hai raggiunto il limite del servizio. Riprova più tardi o scegli un altro servizio.', r_tooLong: 'MyMemory traduce solo testi brevi: per le pagine intere scegli Google Cloud, DeepL o LibreTranslate.'
+      r_config: 'Il servizio scelto non è configurato: completa i dati qui sotto.', r_badKey: 'La chiave API è stata rifiutata dal servizio.', r_quota: 'Hai raggiunto il limite del servizio. Riprova più tardi o scegli un altro servizio.', r_tooLong: 'MyMemory traduce solo testi brevi: per le pagine intere scegli Google Cloud o DeepL.'
     },
     en: {
       title: 'Translate – translation service',
@@ -23,43 +23,43 @@
       mmEmail: 'Optional email (MyMemory raises the daily limit if you provide it)',
       gDesc: 'Google\'s official API with your own key (Google Cloud billing, monthly free quota). Best for whole pages.',
       dDesc: 'DeepL\'s official API with your own key (Free or Pro). Fewer languages, great quality.',
-      lDesc: 'An instance you choose, even on your own computer: no third party if self-hosted.',
-      apiKey: 'API key', apiKeyOpt: 'API key (if required)', ltUrl: 'Instance address',
+     
+      apiKey: 'API key',
       keysLocal: 'Keys stay in this browser only (chrome.storage.local); they are not synced or sent to anyone but the chosen service.',
-      save: 'Save', saved: 'Saved', needKey: 'Enter the key for the chosen service.', needUrl: 'Enter a valid address (https, or localhost).', denied: 'Permission for the instance was denied.',
+      save: 'Save', saved: 'Saved', needKey: 'Enter the key for the chosen service.',
       privacy: 'Privacy policy',
-      r_config: 'The chosen service is not configured: complete the details below.', r_badKey: 'The API key was rejected by the service.', r_quota: 'You reached the service limit. Try later or choose another service.', r_tooLong: 'MyMemory only translates short text: for whole pages choose Google Cloud, DeepL or LibreTranslate.'
+      r_config: 'The chosen service is not configured: complete the details below.', r_badKey: 'The API key was rejected by the service.', r_quota: 'You reached the service limit. Try later or choose another service.', r_tooLong: 'MyMemory only translates short text: for whole pages choose Google Cloud or DeepL.'
     },
     es: {
       title: 'Translate – servicio de traducción', lead: 'Elige a quién se envía el texto que traduces. El desarrollador no tiene servidores y no recibe nada.',
       service: 'Servicio', mmDesc: 'Gratis, sin clave (Translated S.r.l., Italia). Límite diario y textos cortos (máx. 500 bytes).', mmEmail: 'Correo opcional (MyMemory amplía el límite diario)',
-      gDesc: 'API oficial de Google con tu clave (facturación de Google Cloud, cuota gratuita mensual).', dDesc: 'API oficial de DeepL con tu clave (Free o Pro).', lDesc: 'Instancia elegida por ti, incluso local.',
-      apiKey: 'Clave API', apiKeyOpt: 'Clave API (si se requiere)', ltUrl: 'Dirección de la instancia',
-      keysLocal: 'Las claves se quedan solo en este navegador (chrome.storage.local).', save: 'Guardar', saved: 'Guardado', needKey: 'Introduce la clave del servicio elegido.', needUrl: 'Introduce una dirección válida.', denied: 'Permiso denegado.', privacy: 'Política de privacidad',
+      gDesc: 'API oficial de Google con tu clave (facturación de Google Cloud, cuota gratuita mensual).', dDesc: 'API oficial de DeepL con tu clave (Free o Pro).',
+      apiKey: 'Clave API', apiKeyOpt: 'Clave API (si se requiere)',
+      keysLocal: 'Las claves se quedan solo en este navegador (chrome.storage.local).', save: 'Guardar', saved: 'Guardado', needKey: 'Introduce la clave del servicio elegido.', privacy: 'Política de privacidad',
       r_config: 'El servicio elegido no está configurado.', r_badKey: 'El servicio rechazó la clave API.', r_quota: 'Has alcanzado el límite del servicio.', r_tooLong: 'MyMemory solo traduce textos cortos: para páginas completas elige otro servicio.'
     },
     fr: {
       title: 'Translate – service de traduction', lead: 'Choisissez à qui le texte à traduire est envoyé. Le développeur n\'a aucun serveur et ne reçoit rien.',
       service: 'Service', mmDesc: 'Gratuit, sans clé (Translated S.r.l., Italie). Limite quotidienne et textes courts (500 octets max).', mmEmail: 'E-mail facultatif (MyMemory augmente la limite quotidienne)',
-      gDesc: 'API officielle de Google avec votre clé (facturation Google Cloud, quota gratuit mensuel).', dDesc: 'API officielle de DeepL avec votre clé (Free ou Pro).', lDesc: 'Instance de votre choix, même locale.',
+      gDesc: 'API officielle de Google avec votre clé (facturation Google Cloud, quota gratuit mensuel).', dDesc: 'API officielle de DeepL avec votre clé (Free ou Pro).',
       apiKey: 'Clé API', apiKeyOpt: 'Clé API (si nécessaire)', ltUrl: 'Adresse de l\'instance',
-      keysLocal: 'Les clés restent uniquement dans ce navigateur (chrome.storage.local).', save: 'Enregistrer', saved: 'Enregistré', needKey: 'Saisissez la clé du service choisi.', needUrl: 'Saisissez une adresse valide.', denied: 'Autorisation refusée.', privacy: 'Politique de confidentialité',
+      keysLocal: 'Les clés restent uniquement dans ce navigateur (chrome.storage.local).', save: 'Enregistrer', saved: 'Enregistré', needKey: 'Saisissez la clé du service choisi.', privacy: 'Politique de confidentialité',
       r_config: 'Le service choisi n\'est pas configuré.', r_badKey: 'La clé API a été refusée.', r_quota: 'Limite du service atteinte.', r_tooLong: 'MyMemory ne traduit que des textes courts : pour des pages entières, choisissez un autre service.'
     },
     de: {
       title: 'Translate – Übersetzungsdienst', lead: 'Wähle, wer den zu übersetzenden Text erhält. Der Entwickler betreibt keine Server und erhält nichts.',
       service: 'Dienst', mmDesc: 'Kostenlos, ohne Schlüssel (Translated S.r.l., Italien). Tageslimit und nur kurze Texte (max. 500 Byte).', mmEmail: 'Optionale E-Mail (MyMemory erhöht das Tageslimit)',
-      gDesc: 'Offizielle Google-API mit eigenem Schlüssel (Google-Cloud-Abrechnung, monatliches Freikontingent).', dDesc: 'Offizielle DeepL-API mit eigenem Schlüssel (Free oder Pro).', lDesc: 'Selbst gewählte Instanz, auch lokal.',
-      apiKey: 'API-Schlüssel', apiKeyOpt: 'API-Schlüssel (falls nötig)', ltUrl: 'Adresse der Instanz',
-      keysLocal: 'Schlüssel bleiben nur in diesem Browser (chrome.storage.local).', save: 'Speichern', saved: 'Gespeichert', needKey: 'Gib den Schlüssel für den gewählten Dienst ein.', needUrl: 'Gib eine gültige Adresse ein.', denied: 'Berechtigung verweigert.', privacy: 'Datenschutzerklärung',
+      gDesc: 'Offizielle Google-API mit eigenem Schlüssel (Google-Cloud-Abrechnung, monatliches Freikontingent).', dDesc: 'Offizielle DeepL-API mit eigenem Schlüssel (Free oder Pro).',
+      apiKey: 'API-Schlüssel', apiKeyOpt: 'API-Schlüssel (falls nötig)',
+      keysLocal: 'Schlüssel bleiben nur in diesem Browser (chrome.storage.local).', save: 'Speichern', saved: 'Gespeichert', needKey: 'Gib den Schlüssel für den gewählten Dienst ein.', privacy: 'Datenschutzerklärung',
       r_config: 'Der gewählte Dienst ist nicht eingerichtet.', r_badKey: 'Der API-Schlüssel wurde abgelehnt.', r_quota: 'Limit des Dienstes erreicht.', r_tooLong: 'MyMemory übersetzt nur kurze Texte: für ganze Seiten einen anderen Dienst wählen.'
     },
     pt: {
       title: 'Translate – serviço de tradução', lead: 'Escolha para quem o texto a traduzir é enviado. O desenvolvedor não tem servidores e não recebe nada.',
       service: 'Serviço', mmDesc: 'Grátis, sem chave (Translated S.r.l., Itália). Limite diário e textos curtos (máx. 500 bytes).', mmEmail: 'E-mail opcional (o MyMemory aumenta o limite diário)',
-      gDesc: 'API oficial do Google com sua chave (faturamento Google Cloud, cota gratuita mensal).', dDesc: 'API oficial do DeepL com sua chave (Free ou Pro).', lDesc: 'Instância escolhida por você, até local.',
-      apiKey: 'Chave de API', apiKeyOpt: 'Chave de API (se exigida)', ltUrl: 'Endereço da instância',
-      keysLocal: 'As chaves ficam só neste navegador (chrome.storage.local).', save: 'Salvar', saved: 'Salvo', needKey: 'Informe a chave do serviço escolhido.', needUrl: 'Informe um endereço válido.', denied: 'Permissão negada.', privacy: 'Política de privacidade',
+      gDesc: 'API oficial do Google com sua chave (faturamento Google Cloud, cota gratuita mensal).', dDesc: 'API oficial do DeepL com sua chave (Free ou Pro).',
+      apiKey: 'Chave de API', apiKeyOpt: 'Chave de API (se exigida)',
+      keysLocal: 'As chaves ficam só neste navegador (chrome.storage.local).', save: 'Salvar', saved: 'Salvo', needKey: 'Informe a chave do serviço escolhido.', privacy: 'Política de privacidade',
       r_config: 'O serviço escolhido não está configurado.', r_badKey: 'A chave de API foi recusada.', r_quota: 'Limite do serviço atingido.', r_tooLong: 'O MyMemory só traduz textos curtos: para páginas inteiras escolha outro serviço.'
     }
   };
@@ -71,7 +71,7 @@
 
   const $ = (id) => document.getElementById(id);
   const form = $('form');
-  const DEF = { engine: 'mymemory', gKey: '', dKey: '', ltUrl: '', ltKey: '', mmEmail: '' };
+  const DEF = { engine: 'mymemory', gKey: '', dKey: '', ltKey: '', mmEmail: '' };
 
   const reason = new URLSearchParams(location.search).get('reason');
   if (reason && L['r_' + reason]) { $('banner').textContent = tr('r_' + reason); $('banner').hidden = false; }
@@ -83,8 +83,8 @@
   form.addEventListener('change', (e) => { if (e.target.name === 'engine') showFields(); });
 
   chrome.storage.local.get(DEF).then((s) => {
-    form.engine.value = ['mymemory', 'google', 'deepl', 'libre'].includes(s.engine) ? s.engine : 'mymemory';
-    for (const k of ['gKey', 'dKey', 'ltUrl', 'ltKey', 'mmEmail']) $(k).value = s[k] || '';
+    form.engine.value = ['mymemory', 'google', 'deepl'].includes(s.engine) ? s.engine : 'mymemory';
+    for (const k of ['gKey', 'dKey', 'mmEmail']) $(k).value = s[k] || '';
     showFields();
   });
 
@@ -94,19 +94,9 @@
     const v = {
       engine: form.engine.value || 'mymemory',
       gKey: $('gKey').value.trim(), dKey: $('dKey').value.trim(),
-      ltUrl: $('ltUrl').value.trim(), ltKey: $('ltKey').value.trim(), mmEmail: $('mmEmail').value.trim()
+      mmEmail: $('mmEmail').value.trim()
     };
     if ((v.engine === 'google' && !v.gKey) || (v.engine === 'deepl' && !v.dKey)) { st.textContent = tr('needKey'); return; }
-    if (v.engine === 'libre') {
-      let u;
-      try { u = new URL(v.ltUrl); } catch (_) { st.textContent = tr('needUrl'); return; }
-      const local = u.hostname === 'localhost' || u.hostname === '127.0.0.1';
-      if (u.protocol !== 'https:' && !(local && u.protocol === 'http:')) { st.textContent = tr('needUrl'); return; }
-      // Ask for access to this single instance only (runtime permission, user gesture).
-      const ok = await chrome.permissions.request({ origins: [u.origin + '/*'] }).catch(() => false);
-      if (!ok) { st.textContent = tr('denied'); return; }
-      v.ltUrl = u.origin + u.pathname.replace(/\/+$/, '');
-    }
     await chrome.storage.local.set(v);
     await chrome.storage.session.set({ nudged: false }).catch(() => {});
     $('banner').hidden = true;

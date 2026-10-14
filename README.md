@@ -33,20 +33,19 @@ Dalla v1.1.0 l'endpoint **non ufficiale** `translate.googleapis.com/translate_a`
 | **MyMemory** (predefinito) | no | API pubblica di Translated S.r.l. (Italia). Gratuita con limite giornaliero (più alto se indichi un'email) e testi fino a 500 byte: ottima per selezioni e popup, **non per pagine intere**. |
 | **Google Cloud Translation API** | sì, tua | API ufficiale, quota gratuita mensile secondo il listino Google Cloud. Consigliata per le pagine intere. Limita la chiave alla sola "Cloud Translation API". |
 | **DeepL API** (Free/Pro) | sì, tua | API ufficiale. Le chiavi Free finiscono con `:fx`. Meno lingue supportate. |
-| **LibreTranslate** | se richiesta | Istanza scelta da te, anche locale (`http://localhost:5000`): nessun terzo riceve il testo. L'estensione chiede il permesso solo per quell'indirizzo. |
 
 Le chiavi restano in `chrome.storage.local` (mai sincronizzate) e vengono inviate solo al servizio corrispondente.
 
 ## Privacy e conformità (UE / Italia / Chrome Web Store)
 - **Dati trattati**: il testo che scegli di tradurre va al servizio scelto e a nessun altro. Lo sviluppatore non ha server e non riceve nulla. Nessun analytics, cookie o tracciamento. Dettagli in `privacy.html` (IT/EN) e avviso alla prima apertura del popup.
-- **Permessi**: `activeTab`, `scripting`, `contextMenus`, `storage` + gli endpoint ufficiali dei servizi. Permesso facoltativo per un singolo indirizzo solo se configuri LibreTranslate. Nessun content script permanente su tutte le pagine.
-- **GDPR / Codice Privacy**: ogni fornitore tratta il testo come titolare autonomo secondo la propria informativa; l'invio avviene solo su tua richiesta esplicita.
+- **Permessi**: `activeTab`, `scripting`, `contextMenus`, `storage` + gli endpoint HTTPS ufficiali dei tre servizi. Non sono richiesti permessi host generici o opzionali. Nessun content script permanente su tutte le pagine.
+- **GDPR / Codice Privacy**: il testo viene inviato solo su tua richiesta esplicita; il ruolo GDPR dello sviluppatore e dei fornitori dipende dal servizio scelto, dai termini applicabili e dall'uso concreto, come spiegato in `privacy.html`.
 - **Accessibilità**: navigazione da tastiera, etichette ARIA, focus visibile, tema chiaro/scuro automatico, `prefers-reduced-motion`, supporto lingue RTL. Riferimento: WCAG 2.1 AA (la Legge Stanca e l'European Accessibility Act non si applicano direttamente a un'estensione gratuita di un privato: sono usati come buona pratica).
 - Interfaccia localizzata automaticamente (IT, EN, ES, FR, DE, PT-BR); i nomi delle 130+ lingue sono generati con `Intl.DisplayNames` nella lingua del browser.
 
 ## Pubblicazione sul Chrome Web Store
 - **Scheda Privacy**: dichiara il tipo di dati *"Contenuti del sito web"* (testo inviato per la traduzione), spunta le tre certificazioni (nessuna vendita, nessun uso estraneo allo scopo, nessun uso per credito) e indica come URL dell'informativa la versione pubblica di `privacy.html`.
-- **Giustificazioni permessi**: `activeTab`/`scripting` = tradurre la scheda corrente dopo un'azione dell'utente; `contextMenus` = voce del menu; `storage` = preferenze; host = endpoint ufficiali dei servizi di traduzione; host facoltativi = istanza LibreTranslate indicata dall'utente.
+- **Giustificazioni permessi**: `activeTab`/`scripting` = tradurre la scheda corrente dopo un'azione dell'utente; `contextMenus` = voce del menu; `storage` = preferenze; host = endpoint ufficiali dei servizi di traduzione; nessun host facoltativo o generico.
 - **Digital Services Act (UE)**: se distribuisci l'estensione gratis e senza attività commerciale dichiarati **non trader**; i dati di contatto pubblici (nome, indirizzo, telefono) servono solo se sei un *trader*.
 
 ## Licenza

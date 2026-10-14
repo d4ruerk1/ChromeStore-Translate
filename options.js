@@ -9,7 +9,6 @@
       mmEmail: 'Email facoltativa (MyMemory alza il limite giornaliero se la fornisci)',
       gDesc: 'API ufficiale di Google con la tua chiave (fatturazione Google Cloud, quota gratuita mensile). Ideale per pagine intere.',
       dDesc: 'API ufficiale DeepL con la tua chiave (Free o Pro). Meno lingue, ottima qualità.',
-     
       apiKey: 'Chiave API',
       keysLocal: 'Le chiavi restano solo in questo browser (chrome.storage.local), non vengono sincronizzate né inviate ad altri che al servizio scelto.',
       save: 'Salva', saved: 'Salvato', needKey: 'Inserisci la chiave per il servizio scelto.',
@@ -23,7 +22,6 @@
       mmEmail: 'Optional email (MyMemory raises the daily limit if you provide it)',
       gDesc: 'Google\'s official API with your own key (Google Cloud billing, monthly free quota). Best for whole pages.',
       dDesc: 'DeepL\'s official API with your own key (Free or Pro). Fewer languages, great quality.',
-     
       apiKey: 'API key',
       keysLocal: 'Keys stay in this browser only (chrome.storage.local); they are not synced or sent to anyone but the chosen service.',
       save: 'Save', saved: 'Saved', needKey: 'Enter the key for the chosen service.',
@@ -34,7 +32,7 @@
       title: 'Translate – servicio de traducción', lead: 'Elige a quién se envía el texto que traduces. El desarrollador no tiene servidores y no recibe nada.',
       service: 'Servicio', mmDesc: 'Gratis, sin clave (Translated S.r.l., Italia). Límite diario y textos cortos (máx. 500 bytes).', mmEmail: 'Correo opcional (MyMemory amplía el límite diario)',
       gDesc: 'API oficial de Google con tu clave (facturación de Google Cloud, cuota gratuita mensual).', dDesc: 'API oficial de DeepL con tu clave (Free o Pro).',
-      apiKey: 'Clave API', apiKeyOpt: 'Clave API (si se requiere)',
+      apiKey: 'Clave API',
       keysLocal: 'Las claves se quedan solo en este navegador (chrome.storage.local).', save: 'Guardar', saved: 'Guardado', needKey: 'Introduce la clave del servicio elegido.', privacy: 'Política de privacidad',
       r_config: 'El servicio elegido no está configurado.', r_badKey: 'El servicio rechazó la clave API.', r_quota: 'Has alcanzado el límite del servicio.', r_tooLong: 'MyMemory solo traduce textos cortos: para páginas completas elige otro servicio.'
     },
@@ -42,7 +40,7 @@
       title: 'Translate – service de traduction', lead: 'Choisissez à qui le texte à traduire est envoyé. Le développeur n\'a aucun serveur et ne reçoit rien.',
       service: 'Service', mmDesc: 'Gratuit, sans clé (Translated S.r.l., Italie). Limite quotidienne et textes courts (500 octets max).', mmEmail: 'E-mail facultatif (MyMemory augmente la limite quotidienne)',
       gDesc: 'API officielle de Google avec votre clé (facturation Google Cloud, quota gratuit mensuel).', dDesc: 'API officielle de DeepL avec votre clé (Free ou Pro).',
-      apiKey: 'Clé API', apiKeyOpt: 'Clé API (si nécessaire)', ltUrl: 'Adresse de l\'instance',
+      apiKey: 'Clé API',
       keysLocal: 'Les clés restent uniquement dans ce navigateur (chrome.storage.local).', save: 'Enregistrer', saved: 'Enregistré', needKey: 'Saisissez la clé du service choisi.', privacy: 'Politique de confidentialité',
       r_config: 'Le service choisi n\'est pas configuré.', r_badKey: 'La clé API a été refusée.', r_quota: 'Limite du service atteinte.', r_tooLong: 'MyMemory ne traduit que des textes courts : pour des pages entières, choisissez un autre service.'
     },
@@ -50,7 +48,7 @@
       title: 'Translate – Übersetzungsdienst', lead: 'Wähle, wer den zu übersetzenden Text erhält. Der Entwickler betreibt keine Server und erhält nichts.',
       service: 'Dienst', mmDesc: 'Kostenlos, ohne Schlüssel (Translated S.r.l., Italien). Tageslimit und nur kurze Texte (max. 500 Byte).', mmEmail: 'Optionale E-Mail (MyMemory erhöht das Tageslimit)',
       gDesc: 'Offizielle Google-API mit eigenem Schlüssel (Google-Cloud-Abrechnung, monatliches Freikontingent).', dDesc: 'Offizielle DeepL-API mit eigenem Schlüssel (Free oder Pro).',
-      apiKey: 'API-Schlüssel', apiKeyOpt: 'API-Schlüssel (falls nötig)',
+      apiKey: 'API-Schlüssel',
       keysLocal: 'Schlüssel bleiben nur in diesem Browser (chrome.storage.local).', save: 'Speichern', saved: 'Gespeichert', needKey: 'Gib den Schlüssel für den gewählten Dienst ein.', privacy: 'Datenschutzerklärung',
       r_config: 'Der gewählte Dienst ist nicht eingerichtet.', r_badKey: 'Der API-Schlüssel wurde abgelehnt.', r_quota: 'Limit des Dienstes erreicht.', r_tooLong: 'MyMemory übersetzt nur kurze Texte: für ganze Seiten einen anderen Dienst wählen.'
     },
@@ -58,7 +56,7 @@
       title: 'Translate – serviço de tradução', lead: 'Escolha para quem o texto a traduzir é enviado. O desenvolvedor não tem servidores e não recebe nada.',
       service: 'Serviço', mmDesc: 'Grátis, sem chave (Translated S.r.l., Itália). Limite diário e textos curtos (máx. 500 bytes).', mmEmail: 'E-mail opcional (o MyMemory aumenta o limite diário)',
       gDesc: 'API oficial do Google com sua chave (faturamento Google Cloud, cota gratuita mensal).', dDesc: 'API oficial do DeepL com sua chave (Free ou Pro).',
-      apiKey: 'Chave de API', apiKeyOpt: 'Chave de API (se exigida)',
+      apiKey: 'Chave de API',
       keysLocal: 'As chaves ficam só neste navegador (chrome.storage.local).', save: 'Salvar', saved: 'Salvo', needKey: 'Informe a chave do serviço escolhido.', privacy: 'Política de privacidade',
       r_config: 'O serviço escolhido não está configurado.', r_badKey: 'A chave de API foi recusada.', r_quota: 'Limite do serviço atingido.', r_tooLong: 'O MyMemory só traduz textos curtos: para páginas inteiras escolha outro serviço.'
     }
@@ -71,7 +69,7 @@
 
   const $ = (id) => document.getElementById(id);
   const form = $('form');
-  const DEF = { engine: 'mymemory', gKey: '', dKey: '', ltKey: '', mmEmail: '' };
+  const DEF = { engine: 'mymemory', gKey: '', dKey: '', mmEmail: '' };
 
   const reason = new URLSearchParams(location.search).get('reason');
   if (reason && L['r_' + reason]) { $('banner').textContent = tr('r_' + reason); $('banner').hidden = false; }

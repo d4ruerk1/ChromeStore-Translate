@@ -44,7 +44,7 @@ Le chiavi restano in `chrome.storage.local` (mai sincronizzate) e vengono inviat
 - Interfaccia localizzata automaticamente (IT, EN, ES, FR, DE, PT-BR); i nomi delle 130+ lingue sono generati con `Intl.DisplayNames` nella lingua del browser.
 
 ## Pubblicazione sul Chrome Web Store
-- **Scheda Privacy**: dichiara il tipo di dati *"Contenuti del sito web"* (testo inviato per la traduzione), spunta le tre certificazioni (nessuna vendita, nessun uso estraneo allo scopo, nessun uso per credito) e indica come URL dell'informativa la versione pubblica di `privacy.html`.
+- **Scheda Privacy**: dichiara i tipi di dati *"Contenuti del sito web"* (testo inviato per la traduzione) e *"Informazioni personali"* (email facoltativa inviata a MyMemory per alzare il limite giornaliero), spunta le tre certificazioni (nessuna vendita, nessun uso estraneo allo scopo, nessun uso per credito) e indica come URL dell'informativa la versione pubblica di `privacy.html`.
 - **Giustificazioni permessi**: `activeTab`/`scripting` = tradurre la scheda corrente dopo un'azione dell'utente; `contextMenus` = voce del menu; `storage` = preferenze; host = endpoint ufficiali dei servizi di traduzione; nessun host facoltativo o generico.
 - **Digital Services Act (UE)**: se distribuisci l'estensione gratis e senza attività commerciale dichiarati **non trader**; i dati di contatto pubblici (nome, indirizzo, telefono) servono solo se sei un *trader*.
 

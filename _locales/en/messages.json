@@ -1,93 +1,93 @@
 {
- "extName": {
-  "message": "Translate"
- },
- "extDesc": {
-  "message": "Translate selected text and whole pages in place, without breaking the layout."
- },
- "menuSelection": {
-  "message": "Translate “%s”"
- },
- "menuPage": {
-  "message": "Translate page"
- },
- "menuOriginal": {
-  "message": "Show original"
- },
- "cmdTogglePage": {
-  "message": "Translate the page / show the original"
- },
- "detectLanguage": {
-  "message": "Detect language"
- },
- "detectedLang": {
-  "message": "Detected: $LANG$",
-  "placeholders": {
-   "lang": {
-    "content": "$1"
-   }
+  "extName": {
+    "message": "Translate"
+  },
+  "extDesc": {
+    "message": "Translate selected text and whole pages in place, without breaking the layout."
+  },
+  "menuSelection": {
+    "message": "Translate “%s”"
+  },
+  "menuPage": {
+    "message": "Translate page"
+  },
+  "menuOriginal": {
+    "message": "Show original"
+  },
+  "cmdTogglePage": {
+    "message": "Translate the page / show the original"
+  },
+  "detectLanguage": {
+    "message": "Detect language"
+  },
+  "detectedLang": {
+    "message": "Detected: $LANG$",
+    "placeholders": {
+      "lang": {
+        "content": "$1"
+      }
+    }
+  },
+  "sourceLanguage": {
+    "message": "Source language"
+  },
+  "targetLanguage": {
+    "message": "Target language"
+  },
+  "swap": {
+    "message": "Swap languages"
+  },
+  "inputPlaceholder": {
+    "message": "Type or paste text"
+  },
+  "outputPlaceholder": {
+    "message": "Translation"
+  },
+  "outputLabel": {
+    "message": "Translation result"
+  },
+  "copy": {
+    "message": "Copy"
+  },
+  "copied": {
+    "message": "Copied"
+  },
+  "clear": {
+    "message": "Clear"
+  },
+  "translatePage": {
+    "message": "Translate page"
+  },
+  "showOriginal": {
+    "message": "Show original"
+  },
+  "pageUnavailable": {
+    "message": "Not available on this page"
+  },
+  "translating": {
+    "message": "Translating…"
+  },
+  "translatedTo": {
+    "message": "Translated to $LANG$",
+    "placeholders": {
+      "lang": {
+        "content": "$1"
+      }
+    }
+  },
+  "errorGeneric": {
+    "message": "Translation failed. Check your connection or the service chosen in the extension options."
+  },
+  "close": {
+    "message": "Close"
+  },
+  "privacy": {
+    "message": "Privacy"
+  },
+  "privacyNotice": {
+    "message": "Text you choose to translate is sent to the translation service set in the options (default: MyMemory). The developer receives no data. Do not translate sensitive information."
+  },
+  "ok": {
+    "message": "Got it"
   }
- },
- "sourceLanguage": {
-  "message": "Source language"
- },
- "targetLanguage": {
-  "message": "Target language"
- },
- "swap": {
-  "message": "Swap languages"
- },
- "inputPlaceholder": {
-  "message": "Type or paste text"
- },
- "outputPlaceholder": {
-  "message": "Translation"
- },
- "outputLabel": {
-  "message": "Translation result"
- },
- "copy": {
-  "message": "Copy"
- },
- "copied": {
-  "message": "Copied"
- },
- "clear": {
-  "message": "Clear"
- },
- "translatePage": {
-  "message": "Translate page"
- },
- "showOriginal": {
-  "message": "Show original"
- },
- "pageUnavailable": {
-  "message": "Not available on this page"
- },
- "translating": {
-  "message": "Translating…"
- },
- "translatedTo": {
-  "message": "Translated to $LANG$",
-  "placeholders": {
-   "lang": {
-    "content": "$1"
-   }
-  }
- },
- "errorGeneric": {
-  "message": "Translation failed. Check your connection and try again."
- },
- "close": {
-  "message": "Close"
- },
- "privacy": {
-  "message": "Privacy"
- },
- "privacyNotice": {
-  "message": "Text you translate is sent to Google Translate (fallback: MyMemory). The extension collects no data."
- },
- "ok": {
-  "message": "Got it"
- }
 }

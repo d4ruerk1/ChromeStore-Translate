@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Translate</title>
+<style>
+:root{color-scheme:light dark;--acc:#2563eb;--line:#8884;--mut:#6b7280}
+@media (prefers-color-scheme:dark){:root{--acc:#7aa7ff;--mut:#a3a9b2}}
+body{max-width:720px;margin:32px auto;padding:0 20px;font:15px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Ubuntu,sans-serif}
+h1{font-size:22px;margin:0 0 4px}
+.lead{color:var(--mut);margin:0 0 24px}
+.banner{border:1px solid var(--acc);border-radius:10px;padding:10px 14px;margin:0 0 20px}
+fieldset{border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:0 0 16px}
+legend{font-weight:600;padding:0 6px}
+label.opt{display:flex;gap:10px;align-items:flex-start;padding:8px 0;cursor:pointer}
+label.opt input{margin-top:4px}
+.opt small{display:block;color:var(--mut)}
+.fields{margin:4px 0 8px 28px;display:grid;gap:8px}
+.fields[hidden]{display:none}
+.fields label{display:grid;gap:4px;font-size:14px}
+input[type=text],input[type=password],input[type=url],input[type=email]{font:inherit;padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:transparent;color:inherit}
+button{font:inherit;border:0;border-radius:999px;padding:8px 18px;background:var(--acc);color:#fff;font-weight:600;cursor:pointer}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+#status{margin-left:12px;color:var(--mut)}
+a{color:var(--acc)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+  <h1 data-t="title"></h1>
+  <p class="lead" data-t="lead"></p>
+  <div class="banner" id="banner" role="alert" hidden></div>
+  <form id="form">
+    <fieldset>
+      <legend data-t="service"></legend>
+      <label class="opt"><input type="radio" name="engine" value="mymemory"><span><b>MyMemory</b><small data-t="mmDesc"></small></span></label>
+      <div class="fields" data-for="mymemory">
+        <label><span data-t="mmEmail"></span><input type="email" id="mmEmail" autocomplete="off"></label>
+      </div>
+      <label class="opt"><input type="radio" name="engine" value="google"><span><b>Google Cloud Translation</b><small data-t="gDesc"></small></span></label>
+      <div class="fields" data-for="google">
+        <label><span data-t="apiKey"></span><input type="password" id="gKey" autocomplete="off" spellcheck="false"></label>
+      </div>
+      <label class="opt"><input type="radio" name="engine" value="deepl"><span><b>DeepL API</b><small data-t="dDesc"></small></span></label>
+      <div class="fields" data-for="deepl">
+        <label><span data-t="apiKey"></span><input type="password" id="dKey" autocomplete="off" spellcheck="false"></label>
+      </div>
+      <label class="opt"><input type="radio" name="engine" value="libre"><span><b>LibreTranslate</b><small data-t="lDesc"></small></span></label>
+      <div class="fields" data-for="libre">
+        <label><span data-t="ltUrl"></span><input type="url" id="ltUrl" placeholder="https://libretranslate.example.org" spellcheck="false"></label>
+        <label><span data-t="apiKeyOpt"></span><input type="password" id="ltKey" autocomplete="off" spellcheck="false"></label>
+      </div>
+    </fieldset>
+    <p><small data-t="keysLocal"></small></p>
+    <button type="submit" data-t="save"></button><span id="status" role="status" aria-live="polite"></span>
+  </form>
+  <p><a href="privacy.html" data-t="privacy"></a></p>
+</main>
+<script src="options.js"></script>
+</body>
+</html>

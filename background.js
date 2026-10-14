@@ -1,21 +1,39 @@
-/* Translate – service worker: context menus, shortcut, translation engine. */
+/* Translate – service worker: context menus, shortcut, translation engines.
+ *
+ * v1.1.0: the unofficial endpoint translate.googleapis.com (client=gtx) has been
+ * removed. Only official, documented APIs are used, chosen by the user in the
+ * options page:
+ *   - MyMemory (Translated S.r.l., Italy) – public API, no key (default)
+ *   - Google Cloud Translation API v2 – user's own API key
+ *   - DeepL API (Free or Pro) – user's own API key
+ *   - LibreTranslate – instance chosen by the user (also self-hosted)
+ * No server of the developer is involved; API keys stay in chrome.storage.local.
+ */
 importScripts('languages.js');
 
-const GOOGLE = 'https://translate.googleapis.com/translate_a/t';
 const MYMEMORY = 'https://api.mymemory.translated.net/get';
-const MAX_CHARS = 4500;      // per request
-const MAX_ITEMS = 100;       // per request
-const MAX_PARALLEL = 4;
+const GOOGLE_CLOUD = 'https://translation.googleapis.com/language/translate/v2';
+const DEEPL_FREE = 'https://api-free.deepl.com/v2/translate';
+const DEEPL_PRO = 'https://api.deepl.com/v2/translate';
+
+const LIMITS = {
+  mymemory: { chars: 500, items: 1, parallel: 3 },   // MyMemory: max 500 bytes per query
+  google: { chars: 4500, items: 100, parallel: 4 },
+  deepl: { chars: 4500, items: 50, parallel: 3 },    // DeepL: max 50 texts per request
+  libre: { chars: 4500, items: 50, parallel: 2 }
+};
 const TIMEOUT_MS = 15000;
 const CACHE_MAX = 4000;
+const DEFAULTS = { src: 'auto', tgt: null, engine: 'mymemory', gKey: '', dKey: '', ltUrl: '', ltKey: '', mmEmail: '' };
 
 const msg = (k, s) => chrome.i18n.getMessage(k, s) || k;
 const uiLang = () => TLang.normalize((self.navigator && navigator.language) || chrome.i18n.getUILanguage());
 
 /* ---------- settings ---------- */
 async function getSettings() {
-  const s = await chrome.storage.local.get({ src: 'auto', tgt: null });
+  const s = await chrome.storage.local.get(DEFAULTS);
   if (!s.tgt) s.tgt = uiLang();
+  if (!LIMITS[s.engine]) s.engine = 'mymemory';
   return s;
 }
 
@@ -28,8 +46,10 @@ function createMenus() {
   });
 }
 
-chrome.runtime.onInstalled.addListener(async () => {
+chrome.runtime.onInstalled.addListener((details) => {
   createMenus();
+  // First install: let the user choose the translation service (transparency, GDPR art. 13).
+  if (details.reason === 'install') chrome.runtime.openOptionsPage().catch(() => {});
 });
 chrome.runtime.onStartup.addListener(createMenus);
 
@@ -95,10 +115,14 @@ function cacheSet(k, v) {
 /* ---------- concurrency limiter ---------- */
 let active = 0;
 const waiting = [];
-async function limit(fn) {
-  if (active >= MAX_PARALLEL) await new Promise((r) => waiting.push(r));
+async function limit(max, fn) {
+  while (active >= max) await new Promise((r) => waiting.push(r));
   active++;
   try { return await fn(); } finally { active--; const n = waiting.shift(); if (n) n(); }
+}
+
+class EngineError extends Error {
+  constructor(code, status) { super(code); this.code = code; this.status = status; }
 }
 
 async function fetchJSON(url, init) {
@@ -106,51 +130,133 @@ async function fetchJSON(url, init) {
   const t = setTimeout(() => ctrl.abort(), TIMEOUT_MS);
   try {
     const res = await fetch(url, { ...init, signal: ctrl.signal, credentials: 'omit', referrerPolicy: 'no-referrer' });
-    if (!res.ok) { const e = new Error('HTTP ' + res.status); e.status = res.status; throw e; }
+    if (res.status === 401 || res.status === 403) throw new EngineError('badKey', res.status);
+    if (res.status === 429 || res.status === 456) throw new EngineError('quota', res.status);
+    if (!res.ok) throw new EngineError('http', res.status);
     return await res.json();
   } finally { clearTimeout(t); }
 }
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-
-/* ---------- engines ---------- */
-async function google(texts, sl, tl, format) {
-  const url = `${GOOGLE}?client=gtx&format=${format}&sl=${encodeURIComponent(sl)}&tl=${encodeURIComponent(tl)}`;
-  const body = new URLSearchParams();
-  for (const t of texts) body.append('q', t);
+async function withRetry(fn) {
   let lastErr;
   for (let attempt = 0; attempt < 3; attempt++) {
-    try {
-      const data = await limit(() => fetchJSON(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
-        body
-      }));
-      if (!Array.isArray(data) || data.length !== texts.length) throw new Error('Bad response');
-      return data.map((d) => (Array.isArray(d) ? { t: String(d[0] ?? ''), l: d[1] || null } : { t: String(d ?? ''), l: sl === 'auto' ? null : sl }));
-    } catch (e) {
+    try { return await fn(); } catch (e) {
       lastErr = e;
-      if (e.status && e.status < 500 && e.status !== 429) break;
+      if (e.code === 'badKey' || e.code === 'quota' || e.code === 'config' || e.code === 'tooLong') break;
+      if (e.status && e.status < 500) break;
       await sleep(400 * (attempt + 1) ** 2);
     }
   }
   throw lastErr;
 }
 
-async function myMemory(text, sl, tl) {
+/* ---------- language code mapping ---------- */
+function deeplTarget(code) {
+  const m = { en: 'EN-US', pt: 'PT-BR', 'zh-CN': 'ZH-HANS', 'zh-TW': 'ZH-HANT', no: 'NB' };
+  return m[code] || code.split('-')[0].toUpperCase();
+}
+function deeplSource(code) {
+  const m = { 'zh-CN': 'ZH', 'zh-TW': 'ZH', no: 'NB' };
+  return m[code] || code.split('-')[0].toUpperCase();
+}
+function fromDeepl(code) {
+  if (!code) return null;
+  const c = code.toLowerCase();
+  return c === 'zh' ? 'zh-CN' : c === 'nb' ? 'no' : TLang.normalize(c);
+}
+function libreCode(code) {
+  const m = { 'zh-CN': 'zh', 'zh-TW': 'zt', no: 'nb', jw: 'jv', tl: 'tl' };
+  return m[code] || code;
+}
+function fromLibre(code) {
+  if (!code) return null;
+  return code === 'zt' ? 'zh-TW' : code === 'zh' ? 'zh-CN' : TLang.normalize(code);
+}
+const utf8Len = (s) => new TextEncoder().encode(s).length;
+
+/* ---------- engines: (texts[], sl, tl, format, settings) -> [{t, l}] ---------- */
+async function myMemory(texts, sl, tl, format, s) {
+  const text = texts[0];
+  if (utf8Len(text) > 500) throw new EngineError('tooLong');
   const pair = `${sl === 'auto' ? 'Autodetect' : sl}|${tl}`;
-  const data = await fetchJSON(`${MYMEMORY}?q=${encodeURIComponent(text.slice(0, 500))}&langpair=${encodeURIComponent(pair)}`);
-  if (!data || data.responseStatus !== 200) throw new Error('MyMemory error');
-  return { t: data.responseData.translatedText, l: data.responseData.detectedLanguage || (sl === 'auto' ? null : sl) };
+  let url = `${MYMEMORY}?q=${encodeURIComponent(text)}&langpair=${encodeURIComponent(pair)}`;
+  if (s.mmEmail) url += `&de=${encodeURIComponent(s.mmEmail)}`; // higher daily quota (documented by MyMemory)
+  const data = await fetchJSON(url);
+  const status = Number(data && data.responseStatus);
+  const out = data && data.responseData && data.responseData.translatedText;
+  if (status === 429 || /^MYMEMORY WARNING/i.test(out || '')) throw new EngineError('quota', 429);
+  if (status !== 200 || typeof out !== 'string') throw new EngineError('http', status || 0);
+  const det = data.responseData.detectedLanguage;
+  return [{ t: out, l: det ? TLang.normalize(det) : (sl === 'auto' ? null : sl) }];
+}
+
+async function googleCloud(texts, sl, tl, format, s) {
+  if (!s.gKey) throw new EngineError('config');
+  const body = { q: texts, target: tl, format };
+  if (sl !== 'auto') body.source = sl;
+  const data = await fetchJSON(`${GOOGLE_CLOUD}?key=${encodeURIComponent(s.gKey)}`, {
+    method: 'POST', headers: { 'Content-Type': 'application/json; charset=utf-8' }, body: JSON.stringify(body)
+  });
+  const tr = data && data.data && data.data.translations;
+  if (!Array.isArray(tr) || tr.length !== texts.length) throw new EngineError('http', 0);
+  return tr.map((x) => ({ t: String(x.translatedText ?? ''), l: x.detectedSourceLanguage ? TLang.normalize(x.detectedSourceLanguage) : (sl === 'auto' ? null : sl) }));
+}
+
+async function deepl(texts, sl, tl, format, s) {
+  if (!s.dKey) throw new EngineError('config');
+  const endpoint = /:fx$/.test(s.dKey.trim()) ? DEEPL_FREE : DEEPL_PRO;
+  const body = { text: texts, target_lang: deeplTarget(tl) };
+  if (sl !== 'auto') body.source_lang = deeplSource(sl);
+  if (format === 'html') body.tag_handling = 'html';
+  const data = await fetchJSON(endpoint, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Authorization: `DeepL-Auth-Key ${s.dKey.trim()}` },
+    body: JSON.stringify(body)
+  });
+  const tr = data && data.translations;
+  if (!Array.isArray(tr) || tr.length !== texts.length) throw new EngineError('http', 0);
+  return tr.map((x) => ({ t: String(x.text ?? ''), l: fromDeepl(x.detected_source_language) }));
+}
+
+async function libre(texts, sl, tl, format, s) {
+  if (!s.ltUrl) throw new EngineError('config');
+  const base = s.ltUrl.replace(/\/+$/, '');
+  const origin = new URL(base).origin + '/*';
+  if (!(await chrome.permissions.contains({ origins: [origin] }))) throw new EngineError('config');
+  const body = { q: texts, source: sl === 'auto' ? 'auto' : libreCode(sl), target: libreCode(tl), format };
+  if (s.ltKey) body.api_key = s.ltKey;
+  const data = await fetchJSON(`${base}/translate`, {
+    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body)
+  });
+  const tr = Array.isArray(data.translatedText) ? data.translatedText : [data.translatedText];
+  if (tr.length !== texts.length) throw new EngineError('http', 0);
+  const det = Array.isArray(data.detectedLanguage) ? data.detectedLanguage : [data.detectedLanguage];
+  return tr.map((t, i) => ({ t: String(t ?? ''), l: det[i] && det[i].language ? fromLibre(det[i].language) : (sl === 'auto' ? null : sl) }));
+}
+
+const ENGINES = { mymemory: myMemory, google: googleCloud, deepl, libre };
+
+/* Open the options page at most once per browser session when the service needs attention. */
+async function nudgeOptions(reason) {
+  try {
+    const { nudged } = await chrome.storage.session.get({ nudged: false });
+    if (nudged) return;
+    await chrome.storage.session.set({ nudged: true });
+    await chrome.tabs.create({ url: chrome.runtime.getURL(`options.html?reason=${reason}`) });
+  } catch (_) {}
 }
 
 /** Translate an array of strings. format: 'html' (escaped markup) | 'text'. */
-async function translate(texts, sl, tl, format) {
+async function translate(texts, sl, tl, format, s) {
+  const engine = s.engine;
+  const lim = LIMITS[engine];
+  const run = ENGINES[engine];
   const out = new Array(texts.length);
   const todo = [];
   texts.forEach((t, i) => {
     if (!t || !t.trim()) { out[i] = { t, l: null }; return; }
-    const hit = cacheGet(`${format}|${sl}|${tl}|${t}`);
+    const hit = cacheGet(`${engine}|${format}|${sl}|${tl}|${t}`);
     if (hit) out[i] = hit; else todo.push(i);
   });
 
@@ -159,21 +265,20 @@ async function translate(texts, sl, tl, format) {
   let cur = [], chars = 0;
   for (const i of todo) {
     const len = texts[i].length;
-    if (cur.length && (chars + len > MAX_CHARS || cur.length >= MAX_ITEMS)) { groups.push(cur); cur = []; chars = 0; }
+    if (cur.length && (chars + len > lim.chars || cur.length >= lim.items)) { groups.push(cur); cur = []; chars = 0; }
     cur.push(i); chars += len;
   }
   if (cur.length) groups.push(cur);
 
-  await Promise.all(groups.map(async (g) => {
-    let res;
-    try {
-      res = await google(g.map((i) => texts[i]), sl, tl, format);
-    } catch (e) {
-      if (format !== 'text' || g.length !== 1 || texts[g[0]].length > 500) throw e;
-      res = [await myMemory(texts[g[0]], sl, tl)];
-    }
-    g.forEach((i, k) => { out[i] = res[k]; cacheSet(`${format}|${sl}|${tl}|${texts[i]}`, res[k]); });
-  }));
+  try {
+    await Promise.all(groups.map(async (g) => {
+      const res = await withRetry(() => limit(lim.parallel, () => run(g.map((i) => texts[i]), sl, tl, format, s)));
+      g.forEach((i, k) => { out[i] = res[k]; cacheSet(`${engine}|${format}|${sl}|${tl}|${texts[i]}`, res[k]); });
+    }));
+  } catch (e) {
+    if (e && (e.code === 'config' || e.code === 'badKey' || e.code === 'quota' || e.code === 'tooLong')) nudgeOptions(e.code);
+    throw e;
+  }
 
   // Most frequent detected language.
   const freq = {};
@@ -190,9 +295,9 @@ chrome.runtime.onMessage.addListener((m, sender, reply) => {
       const s = await getSettings();
       const sl = m.sl || 'auto';
       const tl = m.tl || s.tgt;
-      const r = await translate(Array.isArray(m.texts) ? m.texts.map(String) : [], sl, tl, m.format === 'text' ? 'text' : 'html');
-      return { ok: true, ...r, tl };
-    })().then(reply, (e) => reply({ ok: false, error: String(e && e.message || e) }));
+      const r = await translate(Array.isArray(m.texts) ? m.texts.map(String) : [], sl, tl, m.format === 'text' ? 'text' : 'html', s);
+      return { ok: true, ...r, tl, engine: s.engine };
+    })().then(reply, (e) => reply({ ok: false, error: String((e && (e.code || e.message)) || e) }));
     return true;
   }
   if (m.type === 'pageState') {

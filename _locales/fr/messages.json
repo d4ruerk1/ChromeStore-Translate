@@ -1,93 +1,93 @@
 {
- "extName": {
-  "message": "Translate"
- },
- "extDesc": {
-  "message": "Traduisez le texte sélectionné et des pages entières sur place, sans casser la mise en page."
- },
- "menuSelection": {
-  "message": "Traduire « %s »"
- },
- "menuPage": {
-  "message": "Traduire la page"
- },
- "menuOriginal": {
-  "message": "Afficher l'original"
- },
- "cmdTogglePage": {
-  "message": "Traduire la page / afficher l'original"
- },
- "detectLanguage": {
-  "message": "Détecter la langue"
- },
- "detectedLang": {
-  "message": "Détectée : $LANG$",
-  "placeholders": {
-   "lang": {
-    "content": "$1"
-   }
+  "extName": {
+    "message": "Translate"
+  },
+  "extDesc": {
+    "message": "Traduisez le texte sélectionné et des pages entières sur place, sans casser la mise en page."
+  },
+  "menuSelection": {
+    "message": "Traduire « %s »"
+  },
+  "menuPage": {
+    "message": "Traduire la page"
+  },
+  "menuOriginal": {
+    "message": "Afficher l'original"
+  },
+  "cmdTogglePage": {
+    "message": "Traduire la page / afficher l'original"
+  },
+  "detectLanguage": {
+    "message": "Détecter la langue"
+  },
+  "detectedLang": {
+    "message": "Détectée : $LANG$",
+    "placeholders": {
+      "lang": {
+        "content": "$1"
+      }
+    }
+  },
+  "sourceLanguage": {
+    "message": "Langue source"
+  },
+  "targetLanguage": {
+    "message": "Langue cible"
+  },
+  "swap": {
+    "message": "Inverser les langues"
+  },
+  "inputPlaceholder": {
+    "message": "Saisissez ou collez du texte"
+  },
+  "outputPlaceholder": {
+    "message": "Traduction"
+  },
+  "outputLabel": {
+    "message": "Résultat de la traduction"
+  },
+  "copy": {
+    "message": "Copier"
+  },
+  "copied": {
+    "message": "Copié"
+  },
+  "clear": {
+    "message": "Effacer"
+  },
+  "translatePage": {
+    "message": "Traduire la page"
+  },
+  "showOriginal": {
+    "message": "Afficher l'original"
+  },
+  "pageUnavailable": {
+    "message": "Indisponible sur cette page"
+  },
+  "translating": {
+    "message": "Traduction…"
+  },
+  "translatedTo": {
+    "message": "Traduit en $LANG$",
+    "placeholders": {
+      "lang": {
+        "content": "$1"
+      }
+    }
+  },
+  "errorGeneric": {
+    "message": "Échec de la traduction. Vérifiez votre connexion ou le service choisi dans les options de l'extension."
+  },
+  "close": {
+    "message": "Fermer"
+  },
+  "privacy": {
+    "message": "Confidentialité"
+  },
+  "privacyNotice": {
+    "message": "Le texte que vous choisissez de traduire est envoyé au service de traduction défini dans les options (par défaut : MyMemory). Le développeur ne reçoit aucune donnée. Ne traduisez pas d'informations sensibles."
+  },
+  "ok": {
+    "message": "Compris"
   }
- },
- "sourceLanguage": {
-  "message": "Langue source"
- },
- "targetLanguage": {
-  "message": "Langue cible"
- },
- "swap": {
-  "message": "Inverser les langues"
- },
- "inputPlaceholder": {
-  "message": "Saisissez ou collez du texte"
- },
- "outputPlaceholder": {
-  "message": "Traduction"
- },
- "outputLabel": {
-  "message": "Résultat de la traduction"
- },
- "copy": {
-  "message": "Copier"
- },
- "copied": {
-  "message": "Copié"
- },
- "clear": {
-  "message": "Effacer"
- },
- "translatePage": {
-  "message": "Traduire la page"
- },
- "showOriginal": {
-  "message": "Afficher l'original"
- },
- "pageUnavailable": {
-  "message": "Indisponible sur cette page"
- },
- "translating": {
-  "message": "Traduction…"
- },
- "translatedTo": {
-  "message": "Traduit en $LANG$",
-  "placeholders": {
-   "lang": {
-    "content": "$1"
-   }
-  }
- },
- "errorGeneric": {
-  "message": "Échec de la traduction. Vérifiez votre connexion et réessayez."
- },
- "close": {
-  "message": "Fermer"
- },
- "privacy": {
-  "message": "Confidentialité"
- },
- "privacyNotice": {
-  "message": "Le texte traduit est envoyé à Google Traduction (secours : MyMemory). L'extension ne collecte aucune donnée."
- },
- "ok": {
-  "message": "Compris"
- }
 }

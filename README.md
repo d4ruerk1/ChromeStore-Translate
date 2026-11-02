@@ -49,4 +49,4 @@ Le chiavi restano in `chrome.storage.local` (mai sincronizzate) e vengono inviat
 - **Digital Services Act (UE)**: se distribuisci l'estensione gratis e senza attività commerciale dichiarati **non trader**; i dati di contatto pubblici (nome, indirizzo, telefono) servono solo se sei un *trader*.
 
 ## Licenza
-MIT, vedi `LICENSE`. Il software è fornito "così com'è", senza garanzie.
+Distribuito sotto licenza [Apache 2.0](LICENSE).
